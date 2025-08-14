@@ -5,61 +5,6 @@ body {
   background-color: #000;
   color: #fff;
   scroll-behavior: smooth;
-  position: relative;
-  overflow-x: hidden;
-}
-
-section {
-  padding: 60px 20px;
-  max-width: 900px;
-  margin: auto;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s ease-out;
-}
-
-/* Fade-in and slide-in animations */
-.fade-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.slide-in-left {
-  transform: translateX(-50px);
-  opacity: 1;
-  animation: slideLeft 0.8s forwards;
-}
-
-.slide-in-right {
-  transform: translateX(50px);
-  opacity: 1;
-  animation: slideRight 0.8s forwards;
-}
-
-@keyframes slideLeft {
-  to { transform: translateX(0); opacity: 1; }
-}
-@keyframes slideRight {
-  to { transform: translateX(0); opacity: 1; }
-}
-
-/* Green side accents */
-body.scrolled::before,
-body.scrolled::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  width: 30px;
-  height: 100%;
-  background: #4CAF50; /* Green accent */
-  z-index: 999;
-}
-
-body.scrolled::before {
-  left: 0;
-}
-body.scrolled::after {
-  right: 0;
 }
 
 /* HERO */
@@ -77,75 +22,53 @@ body.scrolled::after {
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { font-size: 1.2em; line-height: 1.5; }
 
-/* Section Boxes */
-.section-box {
-  background-color: #222;
-  padding: 20px 25px;
-  margin: 20px 0;
-  border-radius: 10px;
+/* Sections */
+section {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: auto;
 }
 
-/* About / Experience / Core Strengths / Languages */
-.section-box p {
-  margin: 10px 0;
-  line-height: 1.4;
-}
-
-/* Skills (now "My Core Strengths") */
-.skills-container {
+/* Box sections */
+.box-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-}
-.skills-container span {
-  padding: 8px 12px;
-  background: #111;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-.skills-container span:hover {
-  background: #4a90e2;
-  cursor: pointer;
-}
-
-/* Creativity Section */
-#creativity {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 40px;
+  position: relative;
 }
-#creativity img {
-  width: 220px;
-  border-radius: 10px;
-  border: 3px solid #4a90e2;
-}
-.creativity-box {
+.box {
   background-color: #222;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
-  flex: 1 1 250px;
-}
-.creativity-box p {
-  margin: 10px 0;
-  line-height: 1.4;
+  flex: 1 1 400px;
+  margin: 10px;
+  opacity: 0;
+  transition: opacity 1s ease, transform 1s ease;
 }
 
-/* Resume Button / Link */
-.resume-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  background: #4a90e2;
-  color: #fff;
-  border-radius: 5px;
+/* Left/Right alternate layout */
+.box-section.left { flex-direction: row; }
+.box-section.right { flex-direction: row-reverse; }
+
+.side-photo {
+  flex: 1 1 200px;
+  text-align: center;
+}
+.side-img {
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+/* Hover effect */
+.box:hover { transform: translateY(-5px); }
+
+/* Resume Link */
+a {
+  color: #4a90e2;
   text-decoration: none;
-  transition: 0.3s;
 }
-.resume-btn:hover {
-  background: #2a6db0;
-}
+a:hover { text-decoration: underline; }
 
 /* Contact Form */
 form {
@@ -173,13 +96,26 @@ button:hover {
   background: #2a6db0;
 }
 
-/* Responsive */
-@media screen and (max-width: 768px) {
-  #creativity {
-    flex-direction: column;
-  }
-  .hero-img {
-    width: 150px;
-    height: 150px;
-  }
+/* Fade-in animation */
+.fade-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
+
+/* Initial fade-in state */
+.box {
+  transform: translateY(50px);
+}
+
+/* Green accents on scroll */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  pointer-events: none;
+  box-shadow: inset 10px 0 0 #00ff00, inset -10px 0 0 #00ff00;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+body.scrolling::before { opacity: 1; }
