@@ -51,16 +51,27 @@ section {
 .box-section.left { flex-direction: row; }
 .box-section.right { flex-direction: row-reverse; }
 
+/* Side photo container */
 .side-photo {
   flex: 1 1 200px;
-  text-align: center;
+  display: flex;
+  flex-direction: row; /* horizontal arrangement of multiple images */
+  gap: 15px; /* space between images */
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
 }
 .side-img {
-  max-width: 200px;
+  max-width: 100%;
+  height: auto;
   border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.side-img:hover {
+  transform: scale(1.05);
 }
 
-/* Hover effect */
+/* Hover effect on boxes */
 .box:hover { transform: translateY(-5px); }
 
 /* Resume Link */
@@ -101,7 +112,6 @@ button:hover {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
-
 /* Initial fade-in state */
 .box {
   transform: translateY(50px);
@@ -119,3 +129,5 @@ body::before {
   transition: opacity 0.5s ease;
 }
 body.scrolling::before { opacity: 1; }
+
+
